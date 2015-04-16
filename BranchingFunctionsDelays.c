@@ -63,8 +63,7 @@ int main(void){ unsigned long volatile delay;
 		In = In >> 2;
 		GPIO_PORTF_DATA_R = In;	// eja
 		if (In == 0) {
-			GPIO_PORTF_DATA_R = GPIO_PORTF_DATA_R | (~0xFB);
-			GPIO_PORTF_DATA_R = GPIO_PORTF_DATA_R ^ (~0xFB);
+			GPIO_PORTF_DATA_R = GPIO_PORTF_DATA_R | 0x04;
 		}
 		if (In == 1) {
 			GPIO_PORTF_DATA_R = GPIO_PORTF_DATA_R | 0x04;
