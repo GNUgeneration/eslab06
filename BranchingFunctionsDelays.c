@@ -59,14 +59,13 @@ int main(void){ unsigned long volatile delay;
   EnableInterrupts();           // enable interrupts for the grader
   while(1){
     // body goes here
-		Delay100ms(1); // eja
+		Delay100ms(0); // eja
 		In = GPIO_PORTF_DATA_R&0x10; //eja
 		In = In >> 2;
 		GPIO_PORTF_DATA_R = In;	// eja
 		if (In == 0) {
-			led = GPIO_PORTF_DATA_R;
-			led = led | 0x10;
-			GPIO_PORTF_DATA_R = led;
+			GPIO_PORTF_DATA_R = GPIO_PORTF_DATA_R ^ 0x04;
+			GPIO_PORTF_DATA_R = GPIO_PORTF_DATA_R | 0x04;
 		}
 		if (In == 1) {
 			GPIO_PORTF_DATA_R = GPIO_PORTF_DATA_R | 0x04;
