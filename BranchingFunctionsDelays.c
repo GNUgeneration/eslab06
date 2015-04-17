@@ -59,11 +59,11 @@ int main(void){ unsigned long volatile delay;
     // body goes here
 		Delay100ms(1); //eja :::: waits 100ms.
 		in = GPIO_PORTF_DATA_R&0x10; //eja :::: reads value of PF4 into in.
-		if (in == 0) { //eja
-			GPIO_PORTF_DATA_R = GPIO_PORTF_DATA_R ^ 0x04;
-		} //eja
-		if (in == 1) { //eja
-			GPIO_PORTF_DATA_R = GPIO_PORTF_DATA_R | 0x04; // eja
-		} //eja
+		if (in == 0) { //eja :::: conditional if statement testing if the value of in is 0.
+			GPIO_PORTF_DATA_R = GPIO_PORTF_DATA_R ^ 0x04; //eja :::: toggle bit 2(blue led)
+		} //eja :::: ending of if statement and test.
+		if (in == 1) { //eja :::: conditional if statement testing if the value of in is 1.
+			GPIO_PORTF_DATA_R = GPIO_PORTF_DATA_R | 0x04; // eja :::: set bit 2 so as to turn led on.
+		} //eja :::: end of if statement and test.
   }
 }
