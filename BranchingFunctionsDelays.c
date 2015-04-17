@@ -44,21 +44,21 @@ void EnableInterrupts(void);  // Enable interrupts
 int main(void){ unsigned long volatile delay;
   TExaS_Init(SW_PIN_PF4, LED_PIN_PF2);  // activate grader and set system clock to 80 MHz
   // initialization goes here
-	SYSCTL_RCGC2_R = SYSCTL_RCGC2_R | SYSCTL_RCGC2_GPIOF; // eja
-	delay = SYSCTL_RCGC2_R; // eja
-	GPIO_PORTF_AMSEL_R = GPIO_PORTF_AMSEL_R & ~0x14; // eja:::: clear bits 4(switch 1) and 2(blue led) in the AMSEL registor. 
-	GPIO_PORTF_PCTL_R = GPIO_PORTF_PCTL_R & ~0x000F0F00; // eja:::: clear bits PF4 and PF2 in the PCTL registor to configure as GPIO.
-	GPIO_PORTF_DIR_R = 0x0E; // eja
-	GPIO_PORTF_AFSEL_R = 0x0000; // eja
-	GPIO_PORTF_DEN_R = 0x1F; // eja
-	GPIO_PORTF_PUR_R = 0x11; //eja
-	GPIO_PORTF_DATA_R = GPIO_PORTF_DATA_R | 0x04; // eja
+	SYSCTL_RCGC2_R = SYSCTL_RCGC2_R | SYSCTL_RCGC2_GPIOF; // eja :::: Turn on the clock for PortF.
+	delay = SYSCTL_RCGC2_R; // eja :::: give clock time to stablize.
+	GPIO_PORTF_AMSEL_R = GPIO_PORTF_AMSEL_R & ~0x14; // eja :::: clear bits 4(switch 1) and 2(blue led) in the AMSEL registor. 
+	GPIO_PORTF_PCTL_R = GPIO_PORTF_PCTL_R & ~0x000F0F00; // eja :::: clear pins PF4 and PF2 in the P control registor to configure as GPIO.
+	GPIO_PORTF_DIR_R = 0x0E; // eja :::: set bits 4 and 0 and clear bits 3, 2, and 1 in the direction registor.
+	GPIO_PORTF_AFSEL_R = 0x0000; // eja :::: clear all bits in the AFSEL registor.
+	GPIO_PORTF_DEN_R = 0x1F; // eja :::: enable digital for pins PF4, PF3, PF2, PF1, PF0. 
+	GPIO_PORTF_PUR_R = 0x11; //eja :::: enable pullup resistors for PF4, PF3, PF2, PF1, PF0.
+	GPIO_PORTF_DATA_R = GPIO_PORTF_DATA_R | 0x04; // eja :::: set bit 2 in the data registor to turn led on.
 
   EnableInterrupts();           // enable interrupts for the grader
   while(1){
     // body goes here
-		Delay100ms(1); //eja
-		in = GPIO_PORTF_DATA_R&0x10; //eja
+		Delay100ms(1); //eja :::: waits 100ms.
+		in = GPIO_PORTF_DATA_R&0x10; //eja :::: reads value of PF4 into in.
 		if (in == 0) { //eja
 			GPIO_PORTF_DATA_R = GPIO_PORTF_DATA_R ^ 0x04;
 		} //eja
