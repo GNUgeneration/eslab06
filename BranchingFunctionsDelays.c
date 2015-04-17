@@ -46,8 +46,8 @@ int main(void){ unsigned long volatile delay;
   // initialization goes here
 	SYSCTL_RCGC2_R = SYSCTL_RCGC2_R | SYSCTL_RCGC2_GPIOF; // eja
 	delay = SYSCTL_RCGC2_R; // eja
-	GPIO_PORTF_AMSEL_R = GPIO_PORTF_AMSEL_R & ~0x14; // eja
-	GPIO_PORTF_PCTL_R = GPIO_PORTF_PCTL_R & ~0x000F0F00; // eja
+	GPIO_PORTF_AMSEL_R = GPIO_PORTF_AMSEL_R & ~0x14; // eja:::: clear bits 4(switch 1) and 2(blue led) in the AMSEL registor. 
+	GPIO_PORTF_PCTL_R = GPIO_PORTF_PCTL_R & ~0x000F0F00; // eja:::: clear bits PF4 and PF2 in the PCTL registor to configure as GPIO.
 	GPIO_PORTF_DIR_R = 0x0E; // eja
 	GPIO_PORTF_AFSEL_R = 0x0000; // eja
 	GPIO_PORTF_DEN_R = 0x1F; // eja
