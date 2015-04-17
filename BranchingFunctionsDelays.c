@@ -58,7 +58,7 @@ int main(void){ unsigned long volatile delay;
   EnableInterrupts();           // enable interrupts for the grader
   while(1){
     // body goes here
-		Delay100ms(0); // eja
+		Delay100ms(1); // eja
 		In = GPIO_PORTF_DATA_R&0x04; //eja
 		In1 = In >> 4;
 		GPIO_PORTF_DATA_R = In1;	// eja
