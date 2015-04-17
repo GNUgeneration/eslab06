@@ -15,7 +15,8 @@
 
 // Global Variables // eja
 unsigned long In; // eja
-unsigned long Out; // eja
+unsigned long In1; // eja
+unsigned long led; //eja
 #include "TExaS.h"
 
 #define GPIO_PORTF_DATA_R       (*((volatile unsigned long *)0x400253FC))
@@ -63,8 +64,9 @@ int main(void){ unsigned long volatile delay;
 		In = In >> 2;
 		GPIO_PORTF_DATA_R = In;	// eja
 		if (In == 0) {
-			GPIO_PORTF_DATA_R = GPIO_PORTF_DATA_R ^ (~0xFB);
-			GPIO_PORTF_DATA_R = GPIO_PORTF_DATA_R ^ 0x04;
+			led = GPIO_PORTF_DATA_R;
+			led = led | 0x10;
+			GPIO_PORTF_DATA_R = led;
 		}
 		if (In == 1) {
 			GPIO_PORTF_DATA_R = GPIO_PORTF_DATA_R | 0x04;
