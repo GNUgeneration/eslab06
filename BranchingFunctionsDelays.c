@@ -13,9 +13,8 @@
 // built-in connection: PF3 connected to green LED
 // built-in connection: PF4 connected to negative logic momentary switch, SW1
 
-// Global Variables // eja
-unsigned long In; // eja
-unsigned long In1; // eja
+// Global Variables //eja
+unsigned long in;
 #include "TExaS.h"
 
 #define GPIO_PORTF_DATA_R       (*((volatile unsigned long *)0x400253FC))
@@ -58,15 +57,13 @@ int main(void){ unsigned long volatile delay;
   EnableInterrupts();           // enable interrupts for the grader
   while(1){
     // body goes here
-		Delay100ms(1); // eja
-		In = GPIO_PORTF_DATA_R&0x04; //eja
-		In1 = In >> 4;
-		GPIO_PORTF_DATA_R = In1;	// eja
-		if (In == 0) {
+		Delay100ms(1); //eja
+		in = GPIO_PORTF_DATA_R&0x10; //eja
+		if (in == 0) { //eja
 			GPIO_PORTF_DATA_R = GPIO_PORTF_DATA_R ^ 0x04;
-		}
-		if (In == 1) {
-			GPIO_PORTF_DATA_R = GPIO_PORTF_DATA_R | 0x04;
-		}
+		} //eja
+		if (in == 1) { //eja
+			GPIO_PORTF_DATA_R = GPIO_PORTF_DATA_R | 0x04; // eja
+		} //eja
   }
 }
